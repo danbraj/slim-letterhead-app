@@ -1,0 +1,38 @@
+{
+  "name": "danbraj/slim4-letterhead-app",
+  "type": "project",
+  "require": {
+
+    "php": "^7.2",
+    "ext-json": "*",
+
+    "slim/slim": "^4.5",
+    "slim/flash": "^0.4.0",
+    "slim/psr7": "^1.2",
+    "slim/twig-view": "^3.1",
+
+    "respect/validation": "^2.0",
+    "monolog/monolog": "^2.1",
+    "php-di/php-di": "^6.2",
+
+    "phpmailer/phpmailer": "^6.1",
+    "mpdf/mpdf": "^8.0"
+    
+  },
+  "license": "",
+  "authors": [
+    {
+      "name": "danbraj",
+      "email": "contact@danb.pl",
+      "homepage": "https://danb.pl/"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "scripts": {
+    "start": "php -S localhost:8060 -t public/"
+  }
+}
