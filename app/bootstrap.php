@@ -1,26 +1,43 @@
 <?php
 
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
 
+// Instantiate PHP-DI ContainerBuilder
+$containerBuilder = new ContainerBuilder();
+
+if (false) { // Should be set to true in production
+	$containerBuilder->enableCompilation(CONTAINER_CACHE_PATH);
+}
+
+// Set up settings
+$settings = require __DIR__ . '/settings.php';
+$settings($containerBuilder);
+
+// Set up dependencies
+$dependencies = require __DIR__ . '/dependencies.php';
+$dependencies($containerBuilder);
+
+// Build PHP-DI Container instance
+$container = $containerBuilder->build();
+
+// Instantiate the app
+AppFactory::setContainer($container);
 $app = AppFactory::create();
 
-$app->addRoutingMiddleware();
+if (false) { // Should be set to true in production
+	$routeCollector = $app->getRouteCollector();
+	$routeCollector->setCacheFile(ROUTER_CACHE_PATH);
+}
 
-$errorMiddleware = $app->addErrorMiddleware(true, true, true);
+// Register middleware
+$middleware = require __DIR__ . '/middleware.php';
+$middleware($app);
 
-$app->get('/', function (Request $request, Response $response, array $args) {
-  $response->getBody()->write("Welcome to <b>slim4-letterhead-app</b>.");
-  return $response;
-});
-
-$app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
-  $name = $args['name'];
-  $response->getBody()->write("Hello, $name");
-  return $response;
-});
+// Register routes
+$routes = require __DIR__ . '/routes.php';
+$routes($app);
 
 $app->run();
