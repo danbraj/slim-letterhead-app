@@ -1,2 +1,15 @@
+{% extends 'layouts/page.twig' %}
+
+{% set title = 'Documents list - page' %}
+
+{% block content %}
 <h1>Dokumenty</h1>
 <p>Lista dokumentów</p>
+{% if documents %}
+<ul>
+  {% for d in documents %}
+  <li>{{ d.id }}. <b>{{ d.name }}</b> {{ d.content }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

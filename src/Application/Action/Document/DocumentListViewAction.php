@@ -2,17 +2,17 @@
 
 namespace App\Application\Action\Document;
 
-use App\Application\Action\Action;
 use Psr\Http\Message\ResponseInterface as Response;
 
-final class DocumentListViewAction extends Action
+final class DocumentListViewAction extends DocumentAction
 {
   /**
    * {@inheritdoc}
    */
   protected function action(): Response
   {
+    $documents = $this->documentRepository->findAll();
     $this->logger->info('Żądanie podstrony: /dokumenty.');
-    return $this->render('list/documents.twig');
+    return $this->render('list/documents.twig', compact('documents'));
   }
 }

@@ -17,7 +17,7 @@ return function (ContainerBuilder $containerBuilder) {
     },
 
     // Database (Pdo) dependency
-    DatabaseAdapter::class => function () {
+    PDO::class => function () {
       $databaseAdapter = new DatabaseAdapter(DATABASE_PATH);
       return $databaseAdapter->provide();
     },

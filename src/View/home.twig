@@ -1,2 +1,12 @@
+{% extends 'layouts/page.twig' %}
+
+{% set title = 'Homepage' %}
+
+{% block seo %}
+<link rel="canonical" href="{{ base_url }}">
+{% endblock %}
+
+{% block content %}
 <h1>slim-letterhead-app</h1>
 <p>Hello, {{ name }}.</p>
+{% endblock %}
