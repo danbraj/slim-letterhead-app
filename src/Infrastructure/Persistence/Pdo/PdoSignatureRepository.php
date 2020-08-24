@@ -19,36 +19,67 @@ class PdoSignatureRepository implements SignatureRepository
 
   public function findAll(): array
   {
-    die;
+    $stmt = $this->db->query('SELECT * FROM signature');
+    $results = [];
+    while ($row = $stmt->fetch()) {
+      $results[] = Signature::createFromArray($row);
+    }
+    return $results;
   }
 
   public function findOne(int $id): Signature
   {
-    die;
+    $stmt = $this->db->prepare('SELECT * FROM signature WHERE id = :id LIMIT 1');
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+    $result = $stmt->execute();
+    if ($result) {
+      $record = $stmt->fetch();
+      if ($record) {
+        return Signature::createFromArray($record);
+      }
+    }
   }
 
   public function create(Signature $signature): bool
   {
-    die;
+    $stmt = $this->db->prepare(
+      'INSERT INTO signature (person, title, facsimile, weight)
+      VALUES (:person, :title, :facsimile, :weight)'
+    );
+    $result = $stmt->execute($signature->jsonSerialize());
+    return $result ? $this->db->lastInsertId() : false;
   }
 
   public function read(int $id): Signature
   {
-    die;
+    return $this->findOne($id);
   }
 
   public function update(Signature $signature): bool
   {
-    die;
+    try {
+      $stmt = $this->db->prepare(
+        'UPDATE signature SET person = :person, title = :title, facsimile = :facsimile, weight = :weight WHERE id = :id'
+      );
+      $result = $stmt->execute($signature->jsonSerialize());
+      return $result && $stmt->rowCount() > 0 ? true : false;
+
+    } catch (\Exception $e) {
+      var_dump($e);die;
+      return false;
+    }
   }
 
   public function delete(int $id): bool
   {
-    die;
+    $stmt = $this->db->prepare('DELETE FROM signature WHERE id = :id');
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+    $result = $stmt->execute();
+    return $result && $stmt->rowCount() > 0 ? true : false;
   }
 
-  public function set(Signature $signature): bool
+  public function set(Signature $sig): bool
   {
-    die;
+    return empty($sig->id) ? $this->create($sig) : $this->update($sig);
   }
 }
