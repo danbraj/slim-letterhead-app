@@ -2,8 +2,13 @@
 
 use App\Application\Service\DatabaseAdapter\DatabaseAdapter;
 use App\Application\Service\Logger\LoggerService;
+use App\Application\Service\MailSender\MailSender;
+use App\Application\Service\MailSender\MailSenderInterface;
+use App\Application\Service\PdfBuilder\PdfBuilder;
+use App\Application\Service\PdfBuilder\PdfBuilderInterface;
 use App\Application\Service\Twig\TwigService;
 use DI\ContainerBuilder;
+use PHPMailer\PHPMailer\PHPMailer;
 use Psr\Log\LoggerInterface;
 use Slim\Views\Twig;
 
@@ -35,8 +40,16 @@ return function (ContainerBuilder $containerBuilder) {
     // Uploader service dependecy
 
     // Mail service dependency
+    MailSenderInterface::class => function ($c) {
+      $mailService = new MailSender(new PHPMailer(), $c->get('settings')['mailer']['creds']);
+      return $mailService->provide();
+    },
 
     // Pdf service dependency
+    PdfBuilderInterface::class => function () {
+      $pdfService = new PdfBuilder([]);
+      return $pdfService->provide();
+    },
 
   ]);
 };
