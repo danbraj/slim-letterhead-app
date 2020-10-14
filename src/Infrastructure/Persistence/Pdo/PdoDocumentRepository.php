@@ -46,8 +46,13 @@ class PdoDocumentRepository implements DocumentRepository
       'INSERT INTO document (name, content, type, preview)
       VALUES (:name, :content, :type, :preview)'
     );
-    $result = $stmt->execute($document->jsonSerialize());
-    return $result ? $this->db->lastInsertId() : false;
+    $result = $stmt->execute([
+      'name' => $document->name,
+      'content' => $document->content,
+      'type' => $document->type,
+      'preview' => $document->preview
+    ]);
+    return $result ? true : false;
   }
 
   public function read(int $id): Document

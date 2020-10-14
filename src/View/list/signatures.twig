@@ -1,0 +1,39 @@
+{% extends 'layouts/page.twig' %}
+
+{% set title = 'Signatures' %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+<div class="buttons">
+  <a href="{{ url_for('signature.create') }}" class="button is-link">Add signature</a>
+</div>
+<p>List of signatures</p>
+{% if signatures %}
+<table class="table is-hoverable">
+  <thead>
+    <tr>
+      <th>Pos</th>
+      <th>Id</th>
+      <th>Title</th>
+      <th>Facsimile</th>
+      <th>Weight</th>
+      <th>Documents</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in signatures %}
+    <tr>
+      <td>{{ loop.revindex }}</td>
+      <td>{{ s.id }}</td>
+      <td>{{ s.title }}</td>
+      <td>{{ s.facsimile }}</td>
+      <td>{{ s.weight }}</td>
+      <td>Documents[]</td>
+      <td>Details | Edit | Delete</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+{% endblock %}

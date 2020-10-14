@@ -1,15 +1,39 @@
 {% extends 'layouts/page.twig' %}
 
-{% set title = 'Documents list - page' %}
+{% set title = 'Documents' %}
 
 {% block content %}
-<h1>Dokumenty</h1>
-<p>Lista dokumentów</p>
+<h1>{{ title }}</h1>
+<div class="buttons">
+  <a href="{{ url_for('document.create') }}" class="button is-link">Add document</a>
+</div>
+<p>List of documents</p>
 {% if documents %}
-<ul>
-  {% for d in documents %}
-  <li>{{ d.id }}. <b>{{ d.name }}</b> {{ d.content }}</li>
-  {% endfor %}
-</ul>
+<table class="table is-hoverable">
+  <thead>
+    <tr>
+      <th>Pos</th>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Content</th>
+      <th>Type</th>
+      <th>Preview</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for d in documents %}
+    <tr>
+      <td>{{ loop.revindex }}</td>
+      <td>{{ d.id }}</td>
+      <td>{{ d.name }}</td>
+      <td>{{ d.content }}</td>
+      <td>{{ d.type }}</td>
+      <td>{{ d.preview }}</td>
+      <td>Details | Pdf | Edit | Delete</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endif %}
 {% endblock %}

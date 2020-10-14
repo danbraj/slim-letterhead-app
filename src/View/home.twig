@@ -6,7 +6,25 @@
 <link rel="canonical" href="{{ base_url }}">
 {% endblock %}
 
+{% block header %}
+<section class="hero is-primary">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">slim-letterhead-app</h1>
+      <h2 class="subtitle">Slim 4 Letterhead App. A simple app with DDD architecture</h2>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
 {% block content %}
-<h1>slim-letterhead-app</h1>
+<h2>{{ title }}</h1>
 <p>Hello, {{ name }}.</p>
+<h3>Routes</h1>
+<ul>
+  <li><a href="{{ url_for('document') }}">Documents</a></li>
+  <li><a href="{{ url_for('document.create') }}">Document add</a></li>
+  <li><a href="{{ url_for('signature') }}">Signatures</a></li>
+  <li><a href="{{ url_for('signature.create') }}">Signature add</a></li>
+</ul>
 {% endblock %}

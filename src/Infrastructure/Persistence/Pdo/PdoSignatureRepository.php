@@ -46,8 +46,13 @@ class PdoSignatureRepository implements SignatureRepository
       'INSERT INTO signature (person, title, facsimile, weight)
       VALUES (:person, :title, :facsimile, :weight)'
     );
-    $result = $stmt->execute($signature->jsonSerialize());
-    return $result ? $this->db->lastInsertId() : false;
+    $result = $stmt->execute([
+      'person' => $signature->person,
+      'title' => $signature->title,
+      'facsimile' => $signature->facsimile,
+      'weight' => $signature->weight
+    ]);
+    return $result ? true : false;
   }
 
   public function read(int $id): Signature
