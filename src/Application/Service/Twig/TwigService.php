@@ -2,6 +2,7 @@
 
 namespace App\Application\Service\Twig;
 
+use App\Application\Service\Twig\Extension\FormDataExtension;
 use Slim\Views\Twig;
 
 class TwigService
@@ -10,7 +11,7 @@ class TwigService
 
   private function addExtenstions()
   {
-    
+    $this->twig->addExtension(new FormDataExtension($this->twig));
   }
 
   private function addEnvironments()
@@ -22,6 +23,7 @@ class TwigService
   {
     $this->twig = Twig::create($settings['path'], $settings['settings']);
     $this->addEnvironments();
+    $this->addExtenstions();
   }
 
   public function provide()

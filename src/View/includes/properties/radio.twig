@@ -1,0 +1,8 @@
+<label class="label">{{ property.desc }}</label>
+<div class="control">
+  {% for value in property.values %}
+  <label class="radio">
+    <input type="radio" name="{{ property.name }}" value="{{ loop.index0 }}"> {{ value }}
+  </label>
+  {% endfor %}
+</div>

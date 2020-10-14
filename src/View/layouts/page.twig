@@ -1,9 +1,15 @@
 {% extends 'layouts/base.twig' %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+{% endblock %}
+
 {% block body %}
-<main id="main-content" class="page">
+<section class="section">
   <div class="container">
+    <div class="content">
     {% block content %}{% endblock %}
+    </div>
   </div>
-</main>
+</section>
 {% endblock %}

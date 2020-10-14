@@ -1,0 +1,18 @@
+<div class="form-section">
+  <p class="title">{{ formData.title }}</p>
+  <p>{{ formData.description }}</p>
+  <form method="post"{% if formData.hasUpload %} enctype="multipart/form-data"{% endif %}>
+    {%- for field in formData.fields %}
+    <div class="field">
+      {% if field.template %}
+      {% include(field.template) with { property: field } %}
+      {% endif %}
+    </div>
+    {%- endfor %}
+    <div class="field">
+      <div class="control">
+        <button class="button is-primary is-link">{{ formData.submitText }}</button>
+      </div>
+    </div>
+  </form>
+</div>
