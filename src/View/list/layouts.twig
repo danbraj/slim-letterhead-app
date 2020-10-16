@@ -1,0 +1,38 @@
+{% extends 'layouts/page.twig' %}
+
+{% set title = 'Layouts' %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+<div class="buttons">
+  <a href="{{ url_for('layout.create') }}" class="button is-link">Add layout</a>
+</div>
+<p>List of layouts</p>
+{% if layouts %}
+<table class="table is-hoverable">
+  <thead>
+    <tr>
+      <th>Pos</th>
+      <th>Id</th>
+      <th>Theme (name)</th>
+      <th>Preview</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in layouts %}
+    <tr>
+      <td>{{ loop.revindex }}</td>
+      <td>{{ item.id }}</td>
+      <td>{{ item.theme }}</td>
+      <td>{{ item.preview }}</td>
+      <td>Details | Edit | Delete</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div class="buttons">
+  <a href="{{ url_for('home') }}" class="button">Go to Homepage</a>
+</div>
+{% endif %}
+{% endblock %}

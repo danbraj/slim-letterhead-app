@@ -1,2 +1,5 @@
 <label class="label">{{ property.desc }}</label>
-<textarea class="textarea" name="{{ property.name }}" placeholder="{{ property.desc }}">{{ property.old ?? property.value }}</textarea>
+<div class="control">
+  <textarea class="textarea" name="{{ property.name }}" placeholder="{{ property.desc }}">{{ property.old ?? property.value }}</textarea>
+</div>
+{%- if property.hint %}<p class="help">{{ property.hint }}</p>{% endif %}
