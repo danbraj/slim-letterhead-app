@@ -25,14 +25,14 @@
       <td>{{ loop.revindex }}</td>
       <td>{{ item.id }}</td>
       <td>{{ item.theme }}</td>
-      <td>{{ item.preview }}</td>
-      <td>Details | Edit | Delete</td>
+      <td>{% if item.preview %}<img src="/uploads/{{ item.preview }}" alt="">{% else %}No preview{% endif %}</td>
+      <td>Details | Edit | <a href="{{ url_for('layout.delete', {'id': item.id}) }}">Delete</a></td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
+{% endif %}
 <div class="buttons">
   <a href="{{ url_for('home') }}" class="button">Go to Homepage</a>
 </div>
-{% endif %}
 {% endblock %}

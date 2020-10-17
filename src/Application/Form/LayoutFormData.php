@@ -10,6 +10,7 @@ class LayoutFormData extends FormData
     $this->title = 'Szablon';
     $this->description = 'Formularz szablonu';
     $this->submitText = 'Zapisz szablon';
+    $this->hasUpload = true;
     $this->fields = [
       [
         'name' => 'id',

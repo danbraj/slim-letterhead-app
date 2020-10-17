@@ -2,7 +2,7 @@
 {% if property.value %}
 <div class="control">
   <div class="select is-multiple">
-    <select multiple size="6">
+    <select multiple size="6" name="{{ property.name }}[]">
       {% for s in property.value %}
       <option value="{{ s.id }}">({{ s.weight }}) {{ s.person }}</option>
       {% endfor %}

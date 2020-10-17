@@ -18,7 +18,13 @@ class DocumentFormData extends FormData
       [
         'name' => 'name',
         'desc' => 'Nazwa dokumentu',
-        'type' => '\App\Application\Form\Property\Str', // +podmienienie danych w tekście
+        'type' => '\App\Application\Form\Property\Str',
+        'required' => true,
+      ],
+      [
+        'name' => 'header',
+        'desc' => 'Nagłówek dokumentu',
+        'type' => '\App\Application\Form\Property\Str',
         'required' => true,
       ],
       [
@@ -38,9 +44,9 @@ class DocumentFormData extends FormData
         ]
       ],
       [
-        'name' => 'preview',
-        'desc' => 'Podgląd',
-        'type' => '\App\Application\Form\Property\Image',
+        'name' => 'layoutId',
+        'desc' => 'Szablon',
+        'type' => '\App\Application\Form\Property\Layout',
       ],
       [
         'name' => 'signatures',

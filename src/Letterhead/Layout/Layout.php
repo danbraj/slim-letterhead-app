@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_styless=1);
+declare(strict_types=1);
 
 namespace App\Letterhead\Layout;
 

@@ -30,10 +30,13 @@
       <td>{{ s.facsimile }}</td>
       <td>{{ s.weight }}</td>
       <td>Documents[]</td>
-      <td>Details | Edit | Delete</td>
+      <td>Details | Edit | <a href="{{ url_for('signature.delete', {'id': s.id}) }}">Delete</a></td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
 {% endif %}
+<div class="buttons">
+  <a href="{{ url_for('home') }}" class="button">Go to Homepage</a>
+</div>
 {% endblock %}

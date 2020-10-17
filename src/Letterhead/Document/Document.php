@@ -10,17 +10,19 @@ class Document implements JsonSerializable
 {
   public $id;
   public $name;
+  public $header;
   public $content;
   public $type;
-  public $preview;
+  public $layoutId;
 
-  public function __construct($id, $name, $content, $type, $preview)
+  public function __construct($id, $name, $header, $content, $type, $layoutId)
   {
     $this->id = $id;
     $this->name = $name;
+    $this->header = $header;
     $this->content = $content;
     $this->type = $type;
-    $this->preview = $preview;
+    $this->layoutId = $layoutId;
   }
 
   public static function createFromArray(array $data)
@@ -28,9 +30,10 @@ class Document implements JsonSerializable
     return new self(
       $data['id'] ?? null,
       $data['name'] ?? null,
+      $data['header'] ?? null,
       $data['content'] ?? null,
       $data['type'] ?? null,
-      $data['preview'] ?? null
+      $data['layoutId'] ?? null
     );
   }
 
@@ -42,9 +45,10 @@ class Document implements JsonSerializable
     return [
       'id' => $this->id,
       'name' => $this->name,
+      'header' => $this->header,
       'content' => $this->content,
       'type' => $this->type,
-      'preview' => $this->preview
+      'layoutId' => $this->layoutId
     ];
   }
 }

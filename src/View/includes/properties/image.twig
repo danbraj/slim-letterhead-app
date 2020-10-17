@@ -1,5 +1,5 @@
 <label class="label">{{ property.desc }}</label>
-<div class="file">
+<div id="file-{{ property.name }}" class="file has-name">
   <label class="file-label">
     <input class="file-input" type="file" name="{{ property.name }}">
     <span class="file-cta">
@@ -10,5 +10,19 @@
         Choose a file…
       </span>
     </span>
+    <span class="file-name">
+      No file uploaded
+    </span>
   </label>
 </div>
+<script>
+(function() {
+  const fileInput = document.querySelector('#file-{{ property.name }} input[type=file]');
+  fileInput.onchange = () => {
+    if (fileInput.files.length > 0) {
+      const fileName = document.querySelector('#file-{{ property.name }} .file-name');
+      fileName.textContent = fileInput.files[0].name;
+    }
+  }
+})();
+</script>

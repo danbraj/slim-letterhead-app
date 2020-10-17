@@ -43,15 +43,17 @@ class PdoDocumentRepository implements DocumentRepository
   public function create(Document $document): bool
   {
     $stmt = $this->db->prepare(
-      'INSERT INTO document (name, content, type, preview)
-      VALUES (:name, :content, :type, :preview)'
+      'INSERT INTO document (name, header, content, type, layoutId)
+      VALUES (:name, :header, :content, :type, :layoutId)'
     );
     $result = $stmt->execute([
       'name' => $document->name,
+      'header' => $document->header,
       'content' => $document->content,
       'type' => $document->type,
-      'preview' => $document->preview
+      'layoutId' => $document->layoutId
     ]);
+    // return $result ? $this->db->lastInsertId() : false;
     return $result ? true : false;
   }
 
@@ -64,7 +66,7 @@ class PdoDocumentRepository implements DocumentRepository
   {
     try {
       $stmt = $this->db->prepare(
-        'UPDATE document SET name = :name, content = :content, type = :type, preview = :preview WHERE id = :id'
+        'UPDATE document SET name = :name, header = :header, content = :content, type = :type, layoutId = :layoutId WHERE id = :id'
       );
       $result = $stmt->execute($document->jsonSerialize());
       return $result && $stmt->rowCount() > 0 ? true : false;

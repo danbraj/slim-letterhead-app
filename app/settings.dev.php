@@ -3,6 +3,7 @@
 define('BASE_URL', 'http://localhost:8060/');
 define('DATABASE_PATH', __DIR__ . '/../storage/data.sqlite3');
 define('UPLOAD_DIRECTORY', __DIR__ . '/../storage/uploads');
+define('THUMBNAIL_DIRECTORY', __DIR__ . '/../public/uploads');
 define('ROUTER_CACHE_PATH', __DIR__ . '/../storage/var/cache/routes.cache.php');
 define('CONTAINER_CACHE_PATH', __DIR__ . '/../storage/var/cache');
 

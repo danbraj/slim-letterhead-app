@@ -11,7 +11,10 @@
     {%- endfor %}
     <div class="field">
       <div class="control">
-        <button class="button is-primary is-link">{{ formData.submitText }}</button>
+        <div class="buttons">
+        <button class="button is-link">{{ formData.submitText }}</button>
+        <a class="button" href="javascript:history.back()">Go Back</a>
+        </div>
       </div>
     </div>
   </form>

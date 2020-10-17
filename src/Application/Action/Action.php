@@ -37,6 +37,22 @@ abstract class Action
     return $this->view->render($this->response, $template, $data);
   }
 
+  protected function resolveArg(string $name)
+  {
+    if (!isset($this->args[$name])) return null;
+    return $this->args[$name];
+  }
+
+  protected function asJson($data = null, int $statusCode = 200): Response
+  {
+    $payload = new ActionPayload($statusCode, $data);
+    $json = json_encode($payload, JSON_PRETTY_PRINT);
+    $this->response->getBody()->write($json);
+    return $this->response
+                ->withHeader('Content-Type', 'application/json')
+                ->withStatus($payload->getStatusCode());
+  }
+
   protected function redirect($urlName): Response
   {
     // REF: https://github.com/slimphp/Slim/issues/2945

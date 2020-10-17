@@ -15,9 +15,10 @@
       <th>Pos</th>
       <th>Id</th>
       <th>Name</th>
+      <th>Header</th>
       <th>Content</th>
       <th>Type</th>
-      <th>Preview</th>
+      <th>LayoutId</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -27,13 +28,17 @@
       <td>{{ loop.revindex }}</td>
       <td>{{ d.id }}</td>
       <td>{{ d.name }}</td>
+      <td>{{ d.header }}</td>
       <td>{{ d.content }}</td>
       <td>{{ d.type }}</td>
-      <td>{{ d.preview }}</td>
-      <td>Details | Pdf | Edit | Delete</td>
+      <td>{{ d.layoutId }}</td>
+      <td>Details | <a href="{{ url_for('document.build', {'id': d.id}) }}">PDF</a> | Edit | <a href="{{ url_for('document.delete', {'id': d.id}) }}">Delete</a></td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
 {% endif %}
+<div class="buttons">
+  <a href="{{ url_for('home') }}" class="button">Go to Homepage</a>
+</div>
 {% endblock %}
