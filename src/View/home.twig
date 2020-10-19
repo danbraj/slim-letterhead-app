@@ -19,14 +19,13 @@
 
 {% block content %}
 <h2>{{ title }}</h1>
-<p>Hello, {{ name }}.</p>
 <h3>Routes</h1>
 <ul>
   <li><a href="{{ url_for('document') }}">Documents</a></li>
-  <li><a href="{{ url_for('document.create') }}">Document add</a></li>
+  <li><a href="{{ url_for('document.form') }}">Document add</a></li>
   <li><a href="{{ url_for('signature') }}">Signatures</a></li>
-  <li><a href="{{ url_for('signature.create') }}">Signature add</a></li>
+  <li><a href="{{ url_for('signature.form') }}">Signature add</a></li>
   <li><a href="{{ url_for('layout') }}">Layouts</a></li>
-  <li><a href="{{ url_for('layout.create') }}">Layout add</a></li>
+  <li><a href="{{ url_for('layout.form') }}">Layout add</a></li>
 </ul>
 {% endblock %}

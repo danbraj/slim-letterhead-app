@@ -12,6 +12,6 @@ final class HomeAction extends Action
    */
   protected function action(): Response
   {
-    return $this->render('home.twig', ['name' => 'Daniel']);
+    return $this->render('home.twig');
   }
 }

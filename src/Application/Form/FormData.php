@@ -31,6 +31,11 @@ abstract class FormData
     }
   }
 
+  public function attachValues($values = [])
+  {
+    $this->values = $values;
+  }
+
   public function build()
   {
     $this->includeProperties();

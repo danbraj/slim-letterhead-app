@@ -35,6 +35,14 @@ final class DocumentFormViewAction extends DocumentAction
       'signatures' => $signatures,
       'layoutId' => $layouts
     ]);
+    // TODO: to complete
+    // $id = intval($this->resolveArg('id'));
+    // if ($id) {
+    //   $document = $this->documentRepository->findOne($id);
+    //   if ($document) {
+    //     $documentFormData->attachValues($document->jsonSerialize());
+    //   }
+    // }
     return $this->render(
       'form/document.twig', [
         'documentFormData' => $documentFormData->build()

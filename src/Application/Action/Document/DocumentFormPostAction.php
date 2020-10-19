@@ -14,7 +14,8 @@ final class DocumentFormPostAction extends DocumentAction
   {
     $parsedBody = $this->request->getParsedBody();
     $document = Document::createFromArray($parsedBody);
-    $result = $this->documentRepository->create($document);
+    $result = $this->documentRepository->set($document);
+    $this->logger->info(this::class . ' :: result: ' . $result);
     return $this->redirect('document');
   }
 }

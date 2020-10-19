@@ -12,7 +12,7 @@ final class SignatureDeleteAction extends SignatureAction
   protected function action(): Response
   {
     $id = intval($this->resolveArg('id'));
-    if ($this->signatureRepository->delete($id)) {
+    if ($id && $this->signatureRepository->delete($id)) {
       return $this->asJson();
     } else {
       return $this->asJson(null, 403);

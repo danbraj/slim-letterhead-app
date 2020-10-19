@@ -9,6 +9,7 @@ class SignatureFormData extends FormData
     $this->title = 'Sygnatura';
     $this->description = 'Formularz sygnatury';
     $this->submitText = 'Zapisz sygnaturę';
+    $this->hasUpload = true;
     $this->fields = [
       [
         'name' => 'id',

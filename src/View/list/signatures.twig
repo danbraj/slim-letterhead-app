@@ -5,32 +5,28 @@
 {% block content %}
 <h1>{{ title }}</h1>
 <div class="buttons">
-  <a href="{{ url_for('signature.create') }}" class="button is-link">Add signature</a>
+  <a href="{{ url_for('signature.form') }}" class="button is-link">Add signature</a>
 </div>
 <p>List of signatures</p>
 {% if signatures %}
-<table class="table is-hoverable">
+<table class="table is-hoverable" id="list">
   <thead>
     <tr>
       <th>Pos</th>
       <th>Id</th>
-      <th>Title</th>
-      <th>Facsimile</th>
+      <th>(Title) Person</th>
       <th>Weight</th>
-      <th>Documents</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
-    {% for s in signatures %}
+    {% for item in signatures %}
     <tr>
       <td>{{ loop.revindex }}</td>
-      <td>{{ s.id }}</td>
-      <td>{{ s.title }}</td>
-      <td>{{ s.facsimile }}</td>
-      <td>{{ s.weight }}</td>
-      <td>Documents[]</td>
-      <td>Details | Edit | <a href="{{ url_for('signature.delete', {'id': s.id}) }}">Delete</a></td>
+      <td>{{ item.id }}</td>
+      <td>{{ item.title }} <b>{{ item.person }}</b></td>
+      <td>{{ item.weight }}</td>
+      <td><a href="{{ url_for('signature.form', {'id': item.id}) }}">Edit</a> | <a class="delete-action" data-id="{{ item.id }}">Delete</a></td>
     </tr>
     {% endfor %}
   </tbody>
@@ -39,4 +35,30 @@
 <div class="buttons">
   <a href="{{ url_for('home') }}" class="button">Go to Homepage</a>
 </div>
+{% endblock %}
+
+{% block javascripts %} 
+<script>
+  const list = document.getElementById('list');
+  if (list) {
+    list.addEventListener('click', function(e) {
+      const el = e.target;
+      if (el.classList.contains('delete-action') && confirm("Are you sure?")) {
+        const itemId = el.dataset.id;
+        const xhr1 = new XMLHttpRequest();
+        const url = "{{ url_for('signature.delete') }}" + itemId;
+        xhr1.open('DELETE', url, true);
+        xhr1.onreadystatechange = function() {
+          if (this.readyState == 3) {
+            console.log('Loading');
+          }
+          if (this.status == 200 && this.readyState == 4) {
+            window.location.reload();
+          }
+        };
+        xhr1.send();
+      }
+    });
+  }
+</script>
 {% endblock %}

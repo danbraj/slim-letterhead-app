@@ -12,7 +12,7 @@ final class DocumentDeleteAction extends DocumentAction
   protected function action(): Response
   {
     $id = intval($this->resolveArg('id'));
-    if ($this->documentRepository->delete($id)) {
+    if ($id && $this->documentRepository->delete($id)) {
       return $this->asJson();
     } else {
       return $this->asJson(null, 403);

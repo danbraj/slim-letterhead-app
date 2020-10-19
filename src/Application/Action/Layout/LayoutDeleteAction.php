@@ -12,7 +12,7 @@ final class LayoutDeleteAction extends LayoutAction
   protected function action(): Response
   {
     $id = intval($this->resolveArg('id'));
-    if ($this->layoutRepository->delete($id)) {
+    if ($id && $this->layoutRepository->delete($id)) {
       return $this->asJson();
     } else {
       return $this->asJson(null, 403);

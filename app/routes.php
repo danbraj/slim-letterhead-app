@@ -9,22 +9,23 @@ return function (App $app) {
   
   $app->group('/documents', function(Group $group) {
     $group->get('',                     \App\Application\Action\Document\DocumentListViewAction::class)->setName('document');
-    $group->get('/add',                 \App\Application\Action\Document\DocumentFormViewAction::class)->setName('document.create');
-    $group->post('/add',                \App\Application\Action\Document\DocumentFormPostAction::class);
-    $group->get('/delete/{id:[0-9]+}',  \App\Application\Action\Document\DocumentDeleteAction::class)->setName('document.delete');
+    $group->get('/[{id:[0-9]+}]',       \App\Application\Action\Document\DocumentFormViewAction::class)->setName('document.form');
+    $group->post('/[{id:[0-9]+}]',      \App\Application\Action\Document\DocumentFormPostAction::class);
+    $group->delete('/[{id:[0-9]+}]',    \App\Application\Action\Document\DocumentDeleteAction::class)->setName('document.delete');
+    $group->get('/build/{id:[0-9]+}',   \App\Application\Action\Document\DocumentPdfBuildAction::class)->setName('document.build');
   });
   
   $app->group('/signatures', function(Group $group) {
     $group->get('',                     \App\Application\Action\Signature\SignatureListViewAction::class)->setName('signature');
-    $group->get('/add',                 \App\Application\Action\Signature\SignatureFormViewAction::class)->setName('signature.create');
-    $group->post('/add',                \App\Application\Action\Signature\SignatureFormPostAction::class);
-    $group->get('/delete/{id:[0-9]+}',  \App\Application\Action\Signature\SignatureDeleteAction::class)->setName('signature.delete');
+    $group->get('/[{id:[0-9]+}]',       \App\Application\Action\Signature\SignatureFormViewAction::class)->setName('signature.form');
+    $group->post('/[{id:[0-9]+}]',      \App\Application\Action\Signature\SignatureFormPostAction::class);
+    $group->delete('/[{id:[0-9]+}]',    \App\Application\Action\Signature\SignatureDeleteAction::class)->setName('signature.delete');
   });
 
   $app->group('/layouts', function(Group $group) {
     $group->get('',                     \App\Application\Action\Layout\LayoutListViewAction::class)->setName('layout');
-    $group->get('/add',                 \App\Application\Action\Layout\LayoutFormViewAction::class)->setName('layout.create');
-    $group->post('/add',                \App\Application\Action\Layout\LayoutFormPostAction::class);
-    $group->get('/delete/{id:[0-9]+}',  \App\Application\Action\Layout\LayoutDeleteAction::class)->setName('layout.delete');
+    $group->get('/[{id:[0-9]+}]',       \App\Application\Action\Layout\LayoutFormViewAction::class)->setName('layout.form');
+    $group->post('/[{id:[0-9]+}]',      \App\Application\Action\Layout\LayoutFormPostAction::class);
+    $group->delete('/[{id:[0-9]+}]',    \App\Application\Action\Layout\LayoutDeleteAction::class)->setName('layout.delete');
   });
 };

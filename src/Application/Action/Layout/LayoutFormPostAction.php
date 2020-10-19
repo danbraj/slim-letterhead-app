@@ -13,18 +13,16 @@ final class LayoutFormPostAction extends LayoutAction
    */
   protected function action(): Response
   {
-    $uploadedFile = $this->request->getUploadedFiles()['preview'];
-    if ($uploadedFile->getError() !== UPLOAD_ERR_OK) {
-      $this->logger->error('Layout :: UPLOAD_ERR');
-      return $this->redirect('layout');
-    }
-
-    $fileName = FileUploader::upload($uploadedFile);
     $parsedBody = $this->request->getParsedBody();
-    $parsedBody['preview'] = $fileName;
+    $uploadedFile = $this->request->getUploadedFiles()['preview'];
+    if ($uploadedFile->getError() === UPLOAD_ERR_OK) {
+      $fileName = FileUploader::upload($uploadedFile);
+      $parsedBody['preview'] = $fileName;
+    }
     $layout = Layout::createFromArray($parsedBody);
-    $result = $this->layoutRepository->create($layout);
-    
+    $result = $this->layoutRepository->set($layout);
+
+    $this->logger->info(this::class . ' :: result: ' . $result);
     return $this->redirect('layout');
   }
 }

@@ -13,6 +13,13 @@ final class LayoutFormViewAction extends LayoutAction
   protected function action(): Response
   {
     $layoutFormData = new LayoutFormData();
+    $id = intval($this->resolveArg('id'));
+    if ($id) {
+      $layout = $this->layoutRepository->findOne($id);
+      if ($layout) {
+        $layoutFormData->attachValues($layout->jsonSerialize());
+      }
+    }
     return $this->render(
       'form/layout.twig', ['layoutFormData' => $layoutFormData->build()]
     );
