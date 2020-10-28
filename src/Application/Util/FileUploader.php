@@ -19,17 +19,21 @@ class FileUploader
     if ($extension == 'jpg' || $extension == 'png') {
       // Create thumbnail
       $desiredWidth = 400;
-      $sourceImage = imagecreatefromjpeg($originalPath);
+      $sourceImage = $extension == 'jpg' ? imagecreatefromjpeg($originalPath) : imagecreatefrompng($originalPath);
       $width = imagesx($sourceImage);
-      $height = imagesy($sourceImage);
-      // find the "desired height" of this thumbnail, relative to the desired width
-      $desiredHeight = floor($height * ($desiredWidth / $width));
-      // create a new, "virtual" image
-      $virtualImage = imagecreatetruecolor($desiredWidth, $desiredHeight);
-      // copy source image at a resized size
-      imagecopyresampled($virtualImage, $sourceImage, 0, 0, 0, 0, $desiredWidth, $desiredHeight, $width, $height);
-      // create the physical thumbnail image to its destination
-      imagejpeg($virtualImage, $thumbnailPath);
+      if ($width > $desiredWidth) {
+        $height = imagesy($sourceImage);
+        // find the "desired height" of this thumbnail, relative to the desired width
+        $desiredHeight = floor($height * ($desiredWidth / $width));
+        // create a new, "virtual" image
+        $virtualImage = imagecreatetruecolor($desiredWidth, $desiredHeight);
+        // copy source image at a resized size
+        imagecopyresampled($virtualImage, $sourceImage, 0, 0, 0, 0, $desiredWidth, $desiredHeight, $width, $height);
+        // create the physical thumbnail image to its destination
+        $extension == 'jpg' ? imagejpeg($virtualImage, $thumbnailPath) : imagepng($virtualImage, $thumbnailPath);
+      } else {
+        copy($originalPath, $thumbnailPath);
+      }
     }
     return $filename;
   }

@@ -1,5 +1,12 @@
 # slim4-letterhead-app
 
-*Slim 4 Letterhead App. A simple app with DDD architecture.*
+<p style="text-align:center;">
+  <img src="public/uploads/logo.png" alt="" style="max-width:240px;">
+</p>
+<p style="text-align:center;">
+Slim 4 Letterhead App. A simple app with DDD architecture.
+</p>
 
-- Domain as **Letterhead**
+## Project structure
+
+TODO:

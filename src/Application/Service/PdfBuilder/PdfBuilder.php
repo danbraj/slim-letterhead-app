@@ -11,15 +11,19 @@ class PdfBuilder extends Mpdf implements PdfBuilderInterface
     parent::__construct($settings);
   }
 
-  public function writeHtmlDocument($html)
+  public function writeHtmlDocument(PdfContent $pdfContent)
   {
+    $html = $pdfContent->generateHtml();
+    // echo $html;
+    // die;
     $this->WriteHTML($html);
   }
 
   public function generateDocument()
   {
     // https://mpdf.github.io/reference/mpdf-functions/output.html
-    $this->Output('test.pdf', 'D');
+    // $this->Output('document.pdf', 'D');
+    $this->Output();
   }
   
   public function provide(): PdfBuilderInterface

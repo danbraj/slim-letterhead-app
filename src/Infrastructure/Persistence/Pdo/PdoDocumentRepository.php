@@ -10,6 +10,8 @@ use \PDO;
 
 class PdoDocumentRepository implements DocumentRepository
 {
+  // use Transactions;
+
   private $db;
   
   public function __construct(PDO $db)
@@ -40,7 +42,7 @@ class PdoDocumentRepository implements DocumentRepository
     }
   }
 
-  public function create(Document $document): bool
+  public function create(Document $document): string
   {
     $stmt = $this->db->prepare(
       'INSERT INTO document (name, header, content, type, layoutId)
@@ -53,8 +55,7 @@ class PdoDocumentRepository implements DocumentRepository
       'type' => $document->type,
       'layoutId' => $document->layoutId
     ]);
-    // return $result ? $this->db->lastInsertId() : false;
-    return $result ? true : false;
+    return $result ? $this->db->lastInsertId() : false;
   }
 
   public function read(int $id): Document
@@ -85,7 +86,7 @@ class PdoDocumentRepository implements DocumentRepository
     return $result && $stmt->rowCount() > 0 ? true : false;
   }
 
-  public function set(Document $doc): bool
+  public function set(Document $doc): string
   {
     return empty($doc->id) ? $this->create($doc) : $this->update($doc);
   }

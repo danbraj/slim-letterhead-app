@@ -16,10 +16,10 @@ interface LayoutRepository
    * @return Layout
    * @throws LayoutNotFoundException
    */
-  public function findOne(int $id): Layout;
+  public function findOne(int $id): ?Layout;
 
   public function create(Layout $layout): bool;
-  public function read(int $id): Layout;
+  public function read(int $id): ?Layout;
   public function update(Layout $layout): bool;
   public function delete(int $id): bool;
   

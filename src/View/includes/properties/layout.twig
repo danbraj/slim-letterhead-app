@@ -1,15 +1,16 @@
 <label class="label">{{ property.desc }}</label>
 <div class="control">
-  {% if property.value %}
+  {% if property.elements %}
   <div class="select">
     <select name="{{ property.name }}">
-      {% for item in property.value %}
-      <option>{{ item.id }}. {{ item.theme }}</option>
+      {% for item in property.elements %}
+      <option value="{{ item.id }}"{{ property.value == item.id ? ' selected' : null }}>{{ item.id }}. {{ item.theme }}</option>
       {% endfor %}
     </select>
   </div>
   {% else %}
   <p>Brak szablonów</p>
   {% endif %}
+  <p class="help is-primary">Value: {{ property.value }}</p>
   <p class="help">Wybór szablonu</p>
 </div>

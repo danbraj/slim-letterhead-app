@@ -27,7 +27,7 @@ class PdoLayoutRepository implements LayoutRepository
     return $results;
   }
 
-  public function findOne(int $id): Layout
+  public function findOne(int $id): ?Layout
   {
     $stmt = $this->db->prepare('SELECT * FROM layout WHERE id = :id LIMIT 1');
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
@@ -38,6 +38,7 @@ class PdoLayoutRepository implements LayoutRepository
         return Layout::createFromArray($record);
       }
     }
+    return null;
   }
 
   public function create(Layout $layout): bool
@@ -56,7 +57,7 @@ class PdoLayoutRepository implements LayoutRepository
     return $result ? true : false;
   }
 
-  public function read(int $id): Layout
+  public function read(int $id): ?Layout
   {
     return $this->findOne($id);
   }

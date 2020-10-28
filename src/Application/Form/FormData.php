@@ -10,6 +10,7 @@ abstract class FormData
   protected $submitText;
   protected $hasUpload = false;
   private $values;
+  private $elements;
 
   protected function __construct($values = [])
   {
@@ -28,12 +29,18 @@ abstract class FormData
       $this->fields[$i]['template'] = $template;
       $this->fields[$i]['old'] = $_SESSION['old'][$field['name']] ?? null;
       $this->fields[$i]['value'] = $this->values[$field['name']] ?? null;
+      $this->fields[$i]['elements'] = $this->elements[$field['name']] ?? null;
     }
   }
 
   public function attachValues($values = [])
   {
     $this->values = $values;
+  }
+
+  public function attachElements($elements = [])
+  {
+    $this->elements = $elements;
   }
 
   public function build()

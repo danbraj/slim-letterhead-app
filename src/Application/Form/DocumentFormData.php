@@ -38,7 +38,7 @@ class DocumentFormData extends FormData
         'desc' => 'Typ',
         'type' => '\App\Application\Form\Property\Radio',
         'required' => true,
-        'values' => [
+        'options' => [
           0 => 'PDF',
           1 => 'E-mail'
         ]

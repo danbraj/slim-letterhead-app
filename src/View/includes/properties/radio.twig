@@ -1,8 +1,8 @@
 <label class="label">{{ property.desc }}</label>
 <div class="control">
-  {% for value in property.values %}
+  {% for key,item in property.options %}
   <label class="radio">
-    <input type="radio" name="{{ property.name }}" value="{{ loop.index0 }}"> {{ value }}
+    <input type="radio" name="{{ property.name }}" value="{{ loop.index0 }}"{{ property.value == key ? ' checked' : null }}> {{ item }}
   </label>
   {% endfor %}
 </div>

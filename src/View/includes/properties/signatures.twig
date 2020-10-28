@@ -1,12 +1,13 @@
 <label class="label">{{ property.desc }}</label>
-{% if property.value %}
+{% if property.elements %}
 <div class="control">
   <div class="select is-multiple">
     <select multiple size="6" name="{{ property.name }}[]">
-      {% for s in property.value %}
-      <option value="{{ s.id }}">({{ s.weight }}) {{ s.person }}</option>
+      {% for item in property.elements %}
+      <option value="{{ item.id }}"{% if item.id in property.value %} selected{% endif %}>{{ item.id }}. ({{ item.weight }}) {{ item.person }}</option>
       {% endfor %}
     </select>
   </div>
+  <p class="help is-primary">Value: {{ property.value|join(', ', ' oraz ') }}</p> {# property.value|keys|join() #}
 </div>
 {% endif %}

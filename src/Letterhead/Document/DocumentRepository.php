@@ -18,10 +18,10 @@ interface DocumentRepository
    */
   public function findOne(int $id): Document;
 
-  public function create(Document $document): bool;
+  public function create(Document $document): string;
   public function read(int $id): Document;
   public function update(Document $document): bool;
   public function delete(int $id): bool;
   
-  public function set(Document $document): bool;
+  public function set(Document $document): string;
 }
