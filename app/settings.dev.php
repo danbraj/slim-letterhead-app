@@ -24,6 +24,11 @@ return function (ContainerBuilder $containerBuilder) {
         'path' => __DIR__ . '/../src/View',
         'settings' => []// Set ['cache' => __DIR__ . '/../storage/var/cache/views'] in production
       ],
+      'auth' => [
+        'sessionKey' => 'session_key',
+        'login' => 'admin',
+        'password' => 'admin',
+      ],
       'mailer' => [
         'creds' => [
           'host' => 'smtp1.domena.pl',

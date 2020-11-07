@@ -8,16 +8,6 @@ use Slim\Views\Twig;
 class TwigService
 {
   private $twig;
-
-  private function addExtenstions()
-  {
-    $this->twig->addExtension(new FormDataExtension($this->twig));
-  }
-
-  private function addEnvironments()
-  {
-    $this->twig->getEnvironment()->addGlobal('base_url', BASE_URL);
-  }
  
   public function __construct($settings)
   {
@@ -29,5 +19,20 @@ class TwigService
   public function provide()
   {
     return $this->twig;
+  }
+
+  public function addGlobalVariable($name, $value)
+  {
+    $this->twig->getEnvironment()->addGlobal($name, $value);
+  }
+
+  private function addEnvironments()
+  {
+    $this->twig->getEnvironment()->addGlobal('base_url', BASE_URL);
+  }
+
+  private function addExtenstions()
+  {
+    $this->twig->addExtension(new FormDataExtension($this->twig));
   }
 };

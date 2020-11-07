@@ -1,10 +1,11 @@
 <?php
 
+use App\Application\Service\Auth\Auth;
 use App\Application\Service\DatabaseAdapter\DatabaseAdapter;
 use App\Application\Service\Logger\LoggerService;
 use App\Application\Service\MailSender\MailSender;
 use App\Application\Service\MailSender\MailSenderInterface;
-use App\Application\Service\PdfBuilder\PdfBuilder;
+use App\Application\Service\PdfBuilder\PdfBuilderFacade;
 use App\Application\Service\PdfBuilder\PdfBuilderInterface;
 use App\Application\Service\Twig\TwigService;
 use DI\ContainerBuilder;
@@ -27,15 +28,17 @@ return function (ContainerBuilder $containerBuilder) {
       return $databaseAdapter->provide();
     },
 
+    // Auth dependency
+    Auth::class => function ($c) {
+      return new Auth($c->get('settings')['auth']);
+    },
     // Twig dependency
     Twig::class => function ($c) {
       $twigService = new TwigService($c->get('settings')['view']);
+      $twigService->addGlobalVariable('auth_check', $c->get(Auth::class)->check());
+      $twigService->addGlobalVariable('flash', $c->get(Messages::class));
       return $twigService->provide();
     },
-
-    // Auth dependency
-
-    // Flash messages dependency
 
     // Uploader service dependecy
 
@@ -47,7 +50,7 @@ return function (ContainerBuilder $containerBuilder) {
 
     // Pdf service dependency
     PdfBuilderInterface::class => function () {
-      $pdfService = new PdfBuilder([]);
+      $pdfService = new PdfBuilderFacade();
       return $pdfService->provide();
     },
 

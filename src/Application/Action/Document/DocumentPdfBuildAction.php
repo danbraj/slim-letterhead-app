@@ -43,7 +43,7 @@ final class DocumentPdfBuildAction extends DocumentAction
     $layout = $this->layoutRepository->read($document->layoutId);
     $signatures = $this->documentSignatureRepository->findSignatures($document->id);
  
-    $this->pdfBuilder->writeHtmlDocument(
+    $this->pdfBuilder->fillDocument(
       new PdfContent(
         $layout->template,
         $layout->styles,

@@ -12,7 +12,6 @@ final class DocumentListViewAction extends DocumentAction
   protected function action(): Response
   {
     $documents = $this->documentRepository->findAll();
-    $this->logger->info('Żądanie podstrony: /dokumenty.');
     return $this->render('list/documents.twig', compact('documents'));
   }
 }

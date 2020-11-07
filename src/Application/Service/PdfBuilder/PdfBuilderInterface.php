@@ -4,6 +4,6 @@ namespace App\Application\Service\PdfBuilder;
 
 interface PdfBuilderInterface
 {
-  public function writeHtmlDocument(PdfContent $pdfContent);
+  public function fillDocument(PdfContentInterface $pci);
   public function generateDocument();
 }

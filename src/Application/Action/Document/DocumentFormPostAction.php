@@ -33,16 +33,34 @@ final class DocumentFormPostAction extends DocumentAction
     // var_dump($parsedBody);
     $document = Document::createFromArray($parsedBody);
     // $this->documentRepository->beginTransaction();
-    $newDocumentId = $this->documentRepository->create($document);
-    // TODO: to implement updating document's signatures
-    if ($newDocumentId) {
-      $signatures = $parsedBody['signatures'];
-      foreach ($signatures as $signature) {
-        $this->documentSignatureRepository->set(
-          new DocumentSignature($newDocumentId, $signature)
-        );
+    if ($document->id == null) {
+      $newDocumentId = $this->documentRepository->create($document);
+      if ($newDocumentId) {
+        $signatures = $parsedBody['signatures'] ?? null;
+        if ($signatures) {
+          foreach ($signatures as $signature) {
+            $this->documentSignatureRepository->create(
+              new DocumentSignature($newDocumentId, $signature)
+            );
+          }
+        }
+      }
+    } else {
+      $updatedDocumentId = $document->id;
+      $result = $this->documentRepository->update($document);
+      if ($result) {
+        $signatures = $parsedBody['signatures'] ?? null;
+        $this->documentSignatureRepository->deleteSignatures($updatedDocumentId);
+        if ($signatures) {
+          foreach ($signatures as $signature) {
+            $this->documentSignatureRepository->create(
+              new DocumentSignature($updatedDocumentId, $signature)
+            );
+          }
+        }
       }
     }
+    
     // $this->documentRepository->commitTransaction();
     $this->logger->info(this::class . ' :: check');
     return $this->redirect('document');

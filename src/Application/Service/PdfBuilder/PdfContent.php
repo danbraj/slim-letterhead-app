@@ -2,7 +2,7 @@
 
 namespace App\Application\Service\PdfBuilder;
 
-class PdfContent
+class PdfContent implements PdfContentInterface
 {
   private $layout;
   private $styles;

@@ -12,7 +12,6 @@ final class SignatureListViewAction extends SignatureAction
   protected function action(): Response
   {
     $signatures = $this->signatureRepository->findAll();
-    $this->logger->info('Żądanie podstrony: /podpisy.');
     return $this->render('list/signatures.twig', compact('signatures'));
   }
 }

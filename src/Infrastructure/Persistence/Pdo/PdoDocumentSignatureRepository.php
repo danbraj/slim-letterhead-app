@@ -112,6 +112,14 @@ class PdoDocumentSignatureRepository implements DocumentSignatureRepository
     return $result && $stmt->rowCount() > 0 ? true : false;
   }
 
+  public function deleteSignatures(int $documentId): bool
+  {
+    $stmt = $this->db->prepare('DELETE FROM document_signature WHERE documentId = :documentId');
+    $stmt->bindValue(':documentId', $documentId, PDO::PARAM_INT);
+    $result = $stmt->execute();
+    return $result && $stmt->rowCount() > 0 ? true : false;
+  }
+
   public function set(DocumentSignature $docSig): bool
   {
     return $this->create($docSig);

@@ -24,6 +24,7 @@ interface DocumentSignatureRepository
   public function create(DocumentSignature $documentSignature): bool;
   public function read(int $documentId, int $signatureId): DocumentSignature;
   public function delete(int $documentId, int $signatureId): bool;
+  public function deleteSignatures(int $documentId): bool;
   
   public function set(DocumentSignature $documentSignature): bool;
 }
