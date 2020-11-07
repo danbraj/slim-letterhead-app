@@ -8,9 +8,11 @@ use App\Application\Service\MailSender\MailSenderInterface;
 use App\Application\Service\PdfBuilder\PdfBuilderFacade;
 use App\Application\Service\PdfBuilder\PdfBuilderInterface;
 use App\Application\Service\Twig\TwigService;
+use App\Application\Service\Validator\Validator;
 use DI\ContainerBuilder;
 use PHPMailer\PHPMailer\PHPMailer;
 use Psr\Log\LoggerInterface;
+use Slim\Flash\Messages;
 use Slim\Views\Twig;
 
 return function (ContainerBuilder $containerBuilder) {
@@ -32,6 +34,12 @@ return function (ContainerBuilder $containerBuilder) {
     Auth::class => function ($c) {
       return new Auth($c->get('settings')['auth']);
     },
+
+    // Flash messages dependency
+    Messages::class => function () {
+      return new Messages();
+    },
+
     // Twig dependency
     Twig::class => function ($c) {
       $twigService = new TwigService($c->get('settings')['view']);
@@ -53,6 +61,11 @@ return function (ContainerBuilder $containerBuilder) {
       $pdfService = new PdfBuilderFacade();
       return $pdfService->provide();
     },
+
+    // Validator dependency
+    Validator::class => function () {
+      return new Validator();
+    }
 
   ]);
 };

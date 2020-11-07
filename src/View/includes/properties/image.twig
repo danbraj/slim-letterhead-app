@@ -1,4 +1,4 @@
-<label class="label">{{ property.desc }}</label>
+<label class="label">{{ property.desc }}{% if property.required %} <span class="required">*</span>{% endif %}</label>
 {% if property.value %}
 <div class="preview">
   <img src="/uploads/{{ property.value }}" alt="">
@@ -27,3 +27,8 @@
   }
 })();
 </script>
+{%- if property.errors %}
+{%- for error in property.errors %}
+<p class="help is-danger">{{ error }}</p>
+{%- endfor %}
+{%- endif %}

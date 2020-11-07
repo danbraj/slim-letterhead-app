@@ -27,7 +27,7 @@ class LayoutFormData extends FormData
         'desc' => 'Struktura HTML',
         'type' => '\App\Application\Form\Property\Html',
         'required' => true,
-        'hint' => 'Możliwe użycie dynamicznych pól wpisując: [TITLE], [CONTENT], [STYLES], [SIGNATURES].'
+        'hint' => 'Możliwe użycie dynamicznych pól wpisując: [TITLE], [HEADER], [CONTENT], [STYLES], [SIGNATURES].'
       ],
       [
         'name' => 'styles',

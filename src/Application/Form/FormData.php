@@ -28,6 +28,7 @@ abstract class FormData
       }
       $this->fields[$i]['template'] = $template;
       $this->fields[$i]['old'] = $_SESSION['old'][$field['name']] ?? null;
+      $this->fields[$i]['errors'] = $_SESSION['errors'][$field['name']] ?? null;
       $this->fields[$i]['value'] = $this->values[$field['name']] ?? null;
       $this->fields[$i]['elements'] = $this->elements[$field['name']] ?? null;
     }

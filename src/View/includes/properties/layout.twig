@@ -1,6 +1,6 @@
-<label class="label">{{ property.desc }}</label>
+<label class="label">{{ property.desc }}{% if property.required %} <span class="required">*</span>{% endif %}</label>
+{% if property.elements %}
 <div class="control">
-  {% if property.elements %}
   <div class="select">
     <select name="{{ property.name }}">
       {% for item in property.elements %}
@@ -8,9 +8,14 @@
       {% endfor %}
     </select>
   </div>
-  {% else %}
-  <p>Brak szablonów</p>
-  {% endif %}
-  <p class="help is-primary">Value: {{ property.value }}</p>
-  <p class="help">Wybór szablonu</p>
 </div>
+{% else %}
+<p>Brak szablonów</p>
+{% endif %}
+<p class="help is-primary">Value: {{ property.value }}</p>
+<p class="help">Wybór szablonu</p>
+{%- if property.errors %}
+{%- for error in property.errors %}
+<p class="help is-danger">{{ error }}</p>
+{%- endfor %}
+{%- endif %}

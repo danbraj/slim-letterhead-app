@@ -1,4 +1,4 @@
-<label class="label">{{ property.desc }}</label>
+<label class="label">{{ property.desc }}{% if property.required %} <span class="required">*</span>{% endif %}</label>
 <div class="control">
   <div class="select is-multiple">
     <select multiple size="6" name="{{ property.name }}[]">
@@ -8,3 +8,8 @@
     </select>
   </div>
 </div>
+{%- if property.errors %}
+{%- for error in property.errors %}
+<p class="help is-danger">{{ error }}</p>
+{%- endfor %}
+{%- endif %}

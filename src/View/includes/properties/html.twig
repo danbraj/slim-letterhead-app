@@ -1,5 +1,10 @@
-<label class="label">{{ property.desc }}</label>
+<label class="label">{{ property.desc }}{% if property.required %} <span class="required">*</span>{% endif %}</label>
 <div class="control">
   <textarea class="textarea" name="{{ property.name }}" placeholder="{{ property.desc }}">{{ property.old ?? property.value }}</textarea>
 </div>
 {%- if property.hint %}<p class="help">{{ property.hint }}</p>{% endif %}
+{%- if property.errors %}
+{%- for error in property.errors %}
+<p class="help is-danger">{{ error }}</p>
+{%- endfor %}
+{%- endif %}
