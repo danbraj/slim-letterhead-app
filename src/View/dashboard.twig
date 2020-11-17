@@ -1,0 +1,27 @@
+{% extends 'layouts/page.twig' %}
+
+{% set title = 'Dashboard' %}
+
+{% block header %}
+<section class="hero is-primary">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">{{ title }}</h1>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<h2>Routes</h2>
+<ul>
+  <li><a href="{{ url_for('document') }}">Documents</a></li>
+  <li><a href="{{ url_for('document.form') }}">Document add</a></li>
+  <li><a href="{{ url_for('signature') }}">Signatures</a></li>
+  <li><a href="{{ url_for('signature.form') }}">Signature add</a></li>
+  <li><a href="{{ url_for('layout') }}">Layouts</a></li>
+  <li><a href="{{ url_for('layout.form') }}">Layout add</a></li>
+</ul>
+<a class="button" href="{{ url_for('home') }}">Go to Homepage</a>
+<a class="button" href="{{ url_for('admin.logout') }}">Logout</a>
+{% endblock %}

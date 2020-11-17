@@ -1,0 +1,40 @@
+{% extends 'layouts/page.twig' %}
+
+{% set title = 'Logowanie' %}
+
+{% block header %}
+<section class="hero is-primary">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">Logowanie</h1>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<div class="form-section">
+  <form method="post" autocomplete="off">
+    <div class="field">
+      <label class="label">Login</label>
+      <div class="control">
+        <input class="input" type="text" placeholder="Login" name="login">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Password</label>
+      <div class="control">
+        <input class="input" type="text" placeholder="Password" name="password">
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <div class="buttons">
+          <button class="button is-link">Log In</button>
+          <a class="button" href="{{ url_for('home') }}">Go to Homepage</a>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

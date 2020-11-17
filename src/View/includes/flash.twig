@@ -1,0 +1,18 @@
+{%- if flash.getMessage('success') %}
+<div class="notification is-success">
+  <button class="delete"></button>
+  {{ flash.getMessage('success') | first }}
+</div>
+{%- endif %}
+{%- if flash.getMessage('info') %}
+<div class="notification is-info">
+  <button class="delete"></button>
+  {{ flash.getMessage('info') | first }}
+</div>
+{%- endif %}
+{%- if flash.getMessage('error') %}
+<div class="notification is-danger">
+  <button class="delete"></button>
+  {{ flash.getMessage('error') | first }}
+</div>
+{%- endif %}
